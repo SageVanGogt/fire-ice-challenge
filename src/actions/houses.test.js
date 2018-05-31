@@ -9,7 +9,7 @@ describe('house actions', () => {
       };
       let actual = actions.addHouses(expected.houses);
       
-      expect(actual).toEqual(expected)
+      expect(actual).toEqual(expected);
     });
   });
 });
