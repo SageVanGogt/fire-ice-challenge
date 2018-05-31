@@ -1,34 +1,94 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Card.css';
+import * as API from './../../apiCalls/apiCalls';
 
-const Card = (props) =>{
-  const { 
-    name, 
-    founded, 
-    seats, 
-    titles, 
-    coatOfArms, 
-    ancestralWeapons, 
-    words,
-    swornMembers,
-    loadSwornMembers } = props;
-  return (
-    <div className="card-container">
-      <div className="card-info">
-        <h1>{name}</h1>
-        <h3>founded in: {founded}</h3>
-        <h4>seats: {seats}</h4>
-        <h5>titles:{titles}</h5>
-        <p>{coatOfArms}</p>
-        <p>{ancestralWeapons}</p>
-        <p>{words}</p>
-        <button onClick={() => loadSwornMembers(swornMembers)}>
-          show me swornMembers
-        </button>
+export class Card extends Component { 
+  constructor(props) {
+    super(props),
+
+    this.state = {
+      swornMemberNames: []
+    }
+  }
+
+  loadSwornMembers = async (members) => {
+    let membersInfo = members.map(async (member) => {
+      const memberId = member.split("characters/")[1];
+      const response = await API.fetchSwornMember(memberId);
+      return response.name;
+    }); 
+    membersInfo = await Promise.all(membersInfo);
+    this.setState({
+      swornMemberNames: membersInfo
+    });
+  }
+
+  swornMembersElement = () => {
+    return (
+      <ul className="sworn-members">
+        {this.state.swornMemberNames.map(name => <li>{name}</li> )}
+      </ul>
+    );
+  }
+
+  showButton = (swornMembers) => {
+    return (
+      <button onClick={() => this.loadSwornMembers(swornMembers)}>
+        show me swornMembers
+      </button>
+    );
+  }
+
+  hideButton = () => {
+    return (
+      <button onClick={() => this.setState({swornMemberNames: []})}>
+        hide swornMembers;
+      </button>
+    );
+  }
+
+  render() {
+    const { 
+      name, 
+      founded, 
+      seats, 
+      titles, 
+      coatOfArms, 
+      ancestralWeapons, 
+      words, 
+      swornMembers } = this.props;
+
+    return (
+      <div className="card-container">
+        <div className="card-info">
+          <h1>{name}</h1>
+          <h3>founded in: {founded}</h3>
+          <h4>seats: {seats}</h4>
+          <h5>titles:{titles}</h5>
+          <p>{coatOfArms}</p>
+          <p>{ancestralWeapons}</p>
+          <p>{words}</p>
+          {
+            this.state.swornMemberNames.length > 1 &&
+            this.swornMembersElement()
+          }
+          {
+            this.state.swornMemberNames.length > 1 ?
+              this.hideButton() :
+              this.showButton(swornMembers)
+          }
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  } 
+}
+
+
+
+
+
+
+
 
 
 
