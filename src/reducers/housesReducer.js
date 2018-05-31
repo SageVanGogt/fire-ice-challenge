@@ -3,7 +3,7 @@ const housesReducer = (state = [], action) => {
   switch(action.type) {
     case "ADD_HOUSES":
       return action.houses;
-    case default:
+    default:
       return state;
   }
 }
