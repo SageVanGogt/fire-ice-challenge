@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import { fakeAction } from '../../actions';
-class App extends Component {
+export class App extends Component {
 
   render() {
     return (
@@ -29,8 +29,10 @@ App.propTypes = {
   fakeAction: func.isRequired
 };
 
-const mapStateToProps = ({ fake }) => ({ fake });
-const mapDispatchToProps = dispatch => ({ fakeAction:
+export const mapStateToProps = ({ fake }) => ({ fake });
+
+export const mapDispatchToProps = dispatch => ({ fakeAction:
   () => dispatch(fakeAction())
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
