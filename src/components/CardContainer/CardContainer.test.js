@@ -8,10 +8,15 @@ describe('CardContainer', () => {
   let mockHouses;
 
   beforeEach(() => {
-    mockHouses = [{}, {}]
+    mockHouses = [{}, {}];
     wrapper = shallow(<CardContainer 
       houses={mockHouses}/>);
   });
+
+  it('should match the snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('mapStateToProps', () => {
     it('should return the correct props from state', () => {
       let mockState = {

@@ -35,6 +35,7 @@ export class App extends Component {
         </div>
         <div className='Display-info'>
         </div>
+        <CardContainer />
       </div>
     );
   }
