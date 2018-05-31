@@ -5,3 +5,9 @@ export const fetchHouses = async () => {
   return houses;
 };
 
+export const fetchSwornMember = async (memberId) => {
+  const url = `http://localhost:3001/api/v1/character/${memberId}`;
+  const response = await fetch(url);
+  const member = await response.json();
+  return member;
+}
