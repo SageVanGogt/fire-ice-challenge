@@ -3,7 +3,7 @@ import PropTypes, { shape, func, string } from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-import { fakeAction } from '../../actions';
+import * as actions from '../../actions/houses';
 export class App extends Component {
 
   render() {
@@ -31,8 +31,8 @@ App.propTypes = {
 
 export const mapStateToProps = ({ fake }) => ({ fake });
 
-export const mapDispatchToProps = dispatch => ({ fakeAction:
-  () => dispatch(fakeAction())
+export const mapDispatchToProps = dispatch => ({ 
+  setHouses: (houses) => dispatch(actions.addHouses(houses))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
