@@ -1,6 +1,6 @@
 .card-container {
   width: 300px;
-  height: 413px;
+  height: 440px;
   background-color: rgba(255, 0, 0, 0.6);;
   margin: 10px;
   border-radius: 8px;
@@ -8,4 +8,11 @@
 
 .card-info {
   width: 280px;
+}
+
+.sworn-members {
+  background-color: rgba(255, 0, 0, 0.193);
+  height: 25px;
+  overflow: scroll;
+  list-style: none;
 }
