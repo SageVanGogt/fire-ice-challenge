@@ -8,9 +8,16 @@ export class CardContainer extends Component {
   }
 
   render() {
+    const allHouseCards = this.props.houses.map((house, index) => {
+      return (
+        <Card 
+          {...house} 
+          key={index}/>
+      );
+    })
     return (
       <div className="house-cards-container">
-
+        {allHouseCards}
       </div>
     );
   }
@@ -18,6 +25,6 @@ export class CardContainer extends Component {
 
 export const mapStateToProps = (state) => ({
   houses: state.houses
-})
+});
 
 export default connect(mapStateToProps)(CardContainer);
