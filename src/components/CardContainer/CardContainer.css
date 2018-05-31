@@ -3,4 +3,5 @@
   width: 80 vw;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }

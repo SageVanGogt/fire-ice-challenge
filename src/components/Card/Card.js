@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './Card.css';
+import * as actions from './../../actions/swornMembers';
+import { connect } from 'react-redux';
 import * as API from './../../apiCalls/apiCalls';
 
 export class Card extends Component { 
   constructor(props) {
-    super(props),
-
-    this.state = {
-      swornMemberNames: []
-    }
+    super(props)
   }
 
   loadSwornMembers = async (members) => {
@@ -18,20 +16,19 @@ export class Card extends Component {
       return response.name;
     }); 
     membersInfo = await Promise.all(membersInfo);
-    this.setState({
-      swornMemberNames: membersInfo
-    });
+    this.props.setCurrentSwornMembers(membersInfo);
   }
 
   swornMembersElement = () => {
     return (
       <ul className="sworn-members">
-        {this.state.swornMemberNames.map(name => <li>{name}</li> )}
+        {this.props.swornMembersList.map(name => <li>{name}</li> )}
       </ul>
     );
   }
 
-  showButton = (swornMembers) => {
+  showButton = (props) => {
+    const swornMembers = this.props.swornMembers;
     return (
       <button onClick={() => this.loadSwornMembers(swornMembers)}>
         show me swornMembers
@@ -41,7 +38,7 @@ export class Card extends Component {
 
   hideButton = () => {
     return (
-      <button onClick={() => this.setState({swornMemberNames: []})}>
+      <button onClick={this.props.removeMembers}>
         hide swornMembers;
       </button>
     );
@@ -69,13 +66,13 @@ export class Card extends Component {
           <p>{ancestralWeapons}</p>
           <p>{words}</p>
           {
-            this.state.swornMemberNames.length > 1 &&
+            this.props.swornMembersList.length > 1 &&
             this.swornMembersElement()
           }
           {
-            this.state.swornMemberNames.length > 1 ?
+            this.props.swornMembersList.length > 1 ?
               this.hideButton() :
-              this.showButton(swornMembers)
+              this.showButton()
           }
         </div>
       </div>
@@ -83,13 +80,13 @@ export class Card extends Component {
   } 
 }
 
+const mapStateToProps = (state) => ({
+  swornMembersList: state.swornMembers
+})
 
+const mapDispatchToProps = dispatch => ({
+  setCurrentSwornMembers: (members) => dispatch(actions.addMembers(members)),
+  removeMembers: () => dispatch(actions.removeMembers())
+});
 
-
-
-
-
-
-
-
-export default Card;
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
