@@ -4,7 +4,22 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/houses';
+import * as API from '../../apiCalls/apiCalls';
 export class App extends Component {
+  constructor(props) {
+    super(props)
+  }
+  
+  componentDidMount() {
+    this.loadHouses();
+  }
+
+  loadHouses = () => {
+    const { setHouses } = this.props;
+    API.fetchHouses()
+      .then(res => setHouses(res))
+      .catch(error => error.message);
+  }
 
   render() {
     return (

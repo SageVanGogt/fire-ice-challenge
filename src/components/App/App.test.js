@@ -13,6 +13,10 @@ describe('App', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('loadHouses', () => {
+    it('should call')
+  })
+
   describe('mapDispatchToProps', () => {
     it('should call dispatch with the correct params', () => {
       let mockDispatch = jest.fn();
