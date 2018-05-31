@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from './../Card/Card';
+import './CardContainer.css';
 
 export class CardContainer extends Component {
   constructor(props) {

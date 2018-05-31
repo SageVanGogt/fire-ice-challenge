@@ -1,0 +1,6 @@
+.house-cards-container {
+  margin: auto;
+  width: 80 vw;
+  display: flex;
+  flex-wrap: wrap;
+}
