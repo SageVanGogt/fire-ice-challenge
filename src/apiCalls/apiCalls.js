@@ -10,4 +10,4 @@ export const fetchSwornMember = async (memberId) => {
   const response = await fetch(url);
   const member = await response.json();
   return member;
-}
+};

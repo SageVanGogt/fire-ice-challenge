@@ -9,7 +9,9 @@ const Card = (props) =>{
     titles, 
     coatOfArms, 
     ancestralWeapons, 
-    words } = props;
+    words,
+    swornMembers,
+    loadSwornMembers } = props;
   return (
     <div className="card-container">
       <div className="card-info">
@@ -20,6 +22,9 @@ const Card = (props) =>{
         <p>{coatOfArms}</p>
         <p>{ancestralWeapons}</p>
         <p>{words}</p>
+        <button onClick={() => loadSwornMembers(swornMembers)}>
+          show me swornMembers
+        </button>
       </div>
     </div>
   );
