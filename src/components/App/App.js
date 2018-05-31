@@ -5,6 +5,7 @@ import './App.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/houses';
 import * as API from '../../apiCalls/apiCalls';
+import CardContainer from './../CardContainer/CardContainer';
 export class App extends Component {
   constructor(props) {
     super(props)
@@ -34,6 +35,7 @@ export class App extends Component {
         </div>
         <div className='Display-info'>
         </div>
+        <CardContainer />
       </div>
     );
   }
